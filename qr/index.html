@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Генератор QR-карточек 1080×1920 — CRYA CREW</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --surface:#16161a; --fg:#f2f0ee; --muted:#9c988f;
+    --accent:#ff3d2e; --line:rgba(242,240,238,.12);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    font-weight:300; line-height:1.6; font-size:16px;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 22px 80px}
+  h1{font-family:"Oswald",Impact,sans-serif;font-weight:700;text-transform:uppercase;
+     font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.1;margin:0 0 10px;letter-spacing:.01em}
+  .lead{color:var(--muted);max-width:640px;margin:0 0 36px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px}
+  label{display:block;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+        color:var(--accent);margin:0 0 8px}
+  input[type=text]{
+    width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);
+    background:#0e0e10;color:var(--fg);font-family:inherit;font-size:.95rem;outline:none;
+    transition:border-color .2s
+  }
+  input[type=text]:focus{border-color:var(--accent)}
+  .field{margin-bottom:20px}
+  .hint{font-size:.75rem;color:var(--muted);margin:6px 0 0}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 26px;border-radius:100px;border:1px solid transparent;cursor:pointer;
+    font-family:inherit;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:500;transition:transform .2s,background .2s,border-color .2s
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn--primary{background:var(--accent);color:#fff}
+  .btn--ghost{background:none;border-color:var(--line);color:var(--fg)}
+  .btn--ghost:hover{border-color:var(--fg)}
+  .previews{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:24px}
+  .preview{text-align:center}
+  .preview canvas{
+    width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--line);
+    margin:0 auto 12px;display:block
+  }
+  .preview .name{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.08em;
+                 font-size:.95rem;margin-bottom:10px}
+  .badge{display:inline-block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:5px 12px;margin-bottom:22px}
+  .warn{background:rgba(255,61,46,.1);border:1px solid rgba(255,61,46,.35);border-radius:12px;
+        padding:14px 16px;font-size:.85rem;color:#f0c9c4;margin-bottom:22px}
+  a{color:var(--accent)}
+  @media(max-width:760px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">CRYA CREW · инструмент</span>
+  <h1>QR-карточки для Stories</h1>
+  <p class="lead">
+    Введите Telegram-ссылки — страница соберёт вертикальные карточки 1080×1920&nbsp;px
+    в стиле сайта. Скачайте PNG и выложите в сторис или распечатайте.
+  </p>
+
+  <div class="warn" id="warn" hidden></div>
+
+  <div class="grid">
+    <form class="card" id="form" autocomplete="off">
+      <div class="field">
+        <label for="n1">Имя — карточка 1</label>
+        <input type="text" id="n1" value="Демид">
+      </div>
+      <div class="field">
+        <label for="u1">Ссылка Telegram — карточка 1</label>
+        <input type="text" id="u1" value="https://t.me/username_demid">
+        <p class="hint">Латиница: t.me/ваш_ник. Кириллица в нике не поддерживается в QR (byte-режим).</p>
+      </div>
+
+      <div class="field">
+        <label for="n2">Имя — карточка 2</label>
+        <input type="text" id="n2" value="Гаянэ">
+      </div>
+      <div class="field">
+        <label for="u2">Ссылка Telegram — карточка 2</label>
+        <input type="text" id="u2" value="https://t.me/username_gayane">
+      </div>
+
+      <div class="field">
+        <label for="title">Заголовок на карточке</label>
+        <input type="text" id="title" value="ЧТОБЫ НАПИСАТЬ В ТЕЛЕГРАМ,">
+      </div>
+      <div class="field">
+        <label for="subtitle">Подзаголовок</label>
+        <input type="text" id="subtitle" value="ОТСКАНИРУЙТЕ QR - КОД">
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn--primary" type="submit">Построить карточки</button>
+        <button class="btn btn--ghost" type="button" id="dl">Скачать PNG (обе)</button>
+      </div>
+    </form>
+
+    <div>
+      <div class="previews">
+        <div class="preview">
+          <canvas id="c1" width="1080" height="1920"></canvas>
+          <div class="name" id="label1">Карточка 1</div>
+          <button class="btn btn--ghost" type="button" data-dl="1">Скачать 1080×1920</button>
+        </div>
+        <div class="preview">
+          <canvas id="c2" width="1080" height="1920"></canvas>
+          <div class="name" id="label2">Карточка 2</div>
+          <button class="btn btn--ghost" type="button" data-dl="2">Скачать 1080×1920</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QR-генератор (рисует QR в canvas) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var W = 1080, H = 1920;
+  var ACCENT = '#ff3d2e';
+  var BG = '#0b0b0c';
+  var FG = '#f2f0ee';
+  var MUTED = '#9c988f';
+
+  var el = function (id) { return document.getElementById(id); };
+
+  function fields() {
+    return [
+      { name: el('n1').value.trim() || 'Имя', url: el('u1').value.trim() || 'https://t.me/', canvas: el('c1') },
+      { name: el('n2').value.trim() || 'Имя', url: el('u2').value.trim() || 'https://t.me/', canvas: el('c2') }
+    ];
+  }
+
+  /* Рисует одну карточку: фон, типографика, QR по центру */
+  function drawCard(canvas, data) {
+    var ctx = canvas.getContext('2d');
+    var title = el('title').value.toUpperCase();
+    var subtitle = el('subtitle').value.toUpperCase();
+
+    // фон
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, W, H);
+
+    // мягкое свечение сверху справа
+    var glow = ctx.createRadialGradient(W * 0.85, H * 0.08, 0, W * 0.85, H * 0.08, W * 0.9);
+    glow.addColorStop(0, 'rgba(255,61,46,.22)');
+    glow.addColorStop(1, 'rgba(255,61,46,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    // логотип сверху
+    ctx.textAlign = 'left';
+    ctx.fillStyle = FG;
+    ctx.font = '700 46px Oswald, Impact, sans-serif';
+    ctx.fillText('CRYA', 90, 150);
+    ctx.fillStyle = ACCENT;
+    ctx.font = '300 34px Oswald, Impact, sans-serif';
+    ctx.fillText('CREW', 215, 150);
+
+    // акцентная линия
+    ctx.fillStyle = ACCENT;
+    ctx.fillRect(90, 190, 120, 5);
+
+    // заголовок
+    ctx.fillStyle = FG;
+    ctx.font = '500 62px Oswald, Impact, sans-serif';
+    var y = 330;
+    wrapText(ctx, title, 90, y, W - 180, 74);
+
+    // подзаголовок
+    ctx.fillStyle = MUTED;
+    ctx.font = '300 38px Oswald, Impact, sans-serif';
+    wrapText(ctx, subtitle, 90, 520, W - 180, 50);
+
+    // белая подложка под QR
+    var box = 780, bx = (W - box) / 2, by = 660;
+    ctx.fillStyle = '#ffffff';
+    roundRect(ctx, bx, by, box, box, 36);
+    ctx.fill();
+
+    // сам QR
+    if (window.QRCode && QRCode.toCanvas) {
+      var inner = document.createElement('canvas');
+      QRCode.toCanvas(inner, data.url, { width: box - 100, margin: 0, color: { dark: '#000000', light: '#ffffff' } },
+        function (err) {
+          if (err) { fallback(ctx, bx, by, box); return; }
+          ctx.drawImage(inner, bx + 50, by + 50, box - 100, box - 100);
+          bottom(ctx, data);
+        });
+    } else {
+      fallback(ctx, bx, by, box);
+      bottom(ctx, data);
+    }
+
+    function bottom(c, d) {
+      // имя
+      c.textAlign = 'center';
+      c.fillStyle = FG;
+      c.font = '700 76px Oswald, Impact, sans-serif';
+      c.fillText(d.name.toUpperCase(), W / 2, by + box + 160);
+
+      // ссылка
+      c.fillStyle = ACCENT;
+      c.font = '400 34px Inter, Arial, sans-serif';
+      c.fillText(d.url.replace(/^https?:\/\//, ''), W / 2, by + box + 225);
+
+      // подпись внизу
+      c.fillStyle = MUTED;
+      c.font = '300 28px Inter, Arial, sans-serif';
+      c.fillText('Видеопродакшен полного цикла', W / 2, H - 110);
+    }
+  }
+
+  function fallback(ctx, bx, by, box) {
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'center';
+    ctx.font = '400 34px Inter, Arial, sans-serif';
+    ctx.fillText('QR не загрузился — проверьте интернет', bx + box / 2, by + box / 2);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    var words = String(text).split(/\s+/);
+    var line = '';
+    for (var i = 0; i < words.length; i++) {
+      var test = line ? line + ' ' + words[i] : words[i];
+      if (ctx.measureText(test).width > maxWidth && line) {
+        ctx.fillText(line, x, y);
+        line = words[i];
+        y += lineHeight;
+      } else {
+        line = test;
+      }
+    }
+    if (line) ctx.fillText(line, x, y);
+  }
+
+  function render() {
+    var items = fields();
+    items.forEach(function (item, i) {
+      drawCard(item.canvas, item);
+      el('label' + (i + 1)).textContent = item.name + ' · ' + item.url.replace(/^https?:\/\//, '');
+    });
+    checkCyrillic(items);
+  }
+
+  function checkCyrillic(items) {
+    var warn = el('warn');
+    var bad = items.filter(function (x) { return /[А-Яа-яЁё]/.test(x.url); });
+    if (bad.length) {
+      warn.hidden = false;
+      warn.textContent = 'В ссылке есть кириллица. Telegram-ников на кириллице не существует — ' +
+        'замените на латинский ник вида t.me/username, иначе QR отсканируется, но ссылка не откроется.';
+    } else {
+      warn.hidden = true;
+    }
+  }
+
+  /* Скачивание */
+  function download(canvas, filename) {
+    var link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  el('form').addEventListener('submit', function (e) { e.preventDefault(); render(); });
+
+  document.querySelectorAll('[data-dl]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var i = btn.getAttribute('data-dl');
+      var items = fields();
+      var item = items[i === '1' ? 0 : 1];
+      download(item.canvas, 'crya-qr-' + (i === '1' ? 'demid' : 'gayane') + '.png');
+    });
+  });
+
+  el('dl').addEventListener('click', function () {
+    var items = fields();
+    items.forEach(function (item, i) {
+      setTimeout(function () {
+        download(item.canvas, 'crya-qr-' + (i === 0 ? 'demid' : 'gayane') + '.png');
+      }, i * 350);
+    });
+  });
+
+  // живое обновление при вводе
+  ['n1', 'u1', 'n2', 'u2', 'title', 'subtitle'].forEach(function (id) {
+    el(id).addEventListener('input', function () {
+      clearTimeout(window.__t);
+      window.__t = setTimeout(render, 350);
+    });
+  });
+
+  window.addEventListener('load', render);
+  render();
+})();
+</script>
+</body>
+</html>

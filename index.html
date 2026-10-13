@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CRYA CREW — видеопродакшен полного цикла</title>
+  <meta name="description" content="CRYA CREW — видеопродакшен полного цикла: телевизионные программы, реалити-шоу, сериалы, фильмы, корпоративные ролики. Продакшен, постпродакшен, прямые эфиры.">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <!-- Open Graph / соцсети -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CRYA CREW — видеопродакшен полного цикла">
+  <meta property="og:description" content="Реалити, сериалы, прямые эфиры и постпродакшен. Опыт работы с Пятницей, СТС и ТНТ.">
+  <meta property="og:image" content="assets/img/og.jpg">
+  <meta property="og:url" content="https://example.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://example.com/">
+
+  <!-- Фавикон (замени путь, если положишь favicon.svg в корень) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b0b0c'/%3E%3Ctext x='50' y='72' font-family='Arial,Helvetica,sans-serif' font-size='64' font-weight='bold' fill='%23ff3d2e' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <div class="wrap header__inner">
+      <a class="logo" href="#top" aria-label="CRYA CREW — на главную">
+        <span class="logo__mark">CRYA</span><span class="logo__sub">CREW</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#about">Кто мы</a>
+        <a href="#services">Что мы умеем</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contacts">Контакты</a>
+        <a class="nav__cta" href="#contacts">Связаться</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas class="hero__fx" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="hero__stage">
+        <div class="tv" role="img" aria-label="Телевизор, на экране — кожаная утка CRYA CREW">
+          <div class="tv__body">
+            <div class="tv__screen">
+              <canvas id="tvCanvas" width="420" height="280" aria-hidden="true"></canvas>
+              <span class="tv__scan" aria-hidden="true"></span>
+            </div>
+            <div class="tv__controls" aria-hidden="true">
+              <span class="tv__knob"></span>
+              <span class="tv__knob"></span>
+              <span class="tv__speaker"></span>
+            </div>
+          </div>
+          <div class="tv__legs" aria-hidden="true"><span></span><span></span></div>
+        </div>
+      </div>
+
+      <div class="wrap hero__inner">
+        <p class="hero__eyebrow reveal">Видеопродакшен полного цикла</p>
+        <h1 class="hero__title reveal" data-delay="1">
+          <span>CRYA</span>
+          <span class="outline">CREW</span>
+        </h1>
+        <p class="hero__text reveal" data-delay="2">
+          Телевизионные программы, реалити-шоу, сериалы, фильмы и корпоративные ролики.
+          Благодаря опыту работы с большими телеканалами мы умеем создавать рейтинговые проекты.
+        </p>
+        <div class="hero__actions reveal" data-delay="3">
+          <a class="btn btn--primary" href="#contacts">Обсудить проект</a>
+          <a class="btn btn--ghost" href="#services">Что мы умеем</a>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marqueeTrack">
+          <span>Реалити</span><i>◆</i><span>Сериалы</span><i>◆</i><span>Прямые эфиры</span><i>◆</i><span>Постпродакшен</span><i>◆</i><span>Телевизионные программы</span><i>◆</i><span>Корпоративные ролики</span><i>◆</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="label">Кто мы</span>
+          <h2>Продакшен, который отвечает<br>нашим стандартам качества</h2>
+        </div>
+
+        <div class="about">
+          <div class="about__lead reveal">
+            <p>
+              Мы&nbsp;— видеопродакшен полного цикла телевизионных программ, реалити-шоу,
+              сериалов, фильмов и корпоративных роликов.
+            </p>
+            <p>
+              Мы&nbsp;— два продюсера, работающие вместе уже шесть лет. В&nbsp;2025 году основали
+              отдельный видеопродакшен, который отвечает нашим стандартам качества и реализует
+              личные представления о построении процессов в создании видеоконтента.
+            </p>
+          </div>
+
+          <dl class="stats reveal" data-delay="1">
+            <div class="stat">
+              <dt>6</dt>
+              <dd>лет работаем вместе</dd>
+            </div>
+            <div class="stat">
+              <dt>210</dt>
+              <dd>часов контента в год на самом крупном телевизионном посте России</dd>
+            </div>
+            <div class="stat">
+              <dt>11</dt>
+              <dd>средняя доля шоу «Прятки» два сезона подряд</dd>
+            </div>
+            <div class="stat">
+              <dt>2025</dt>
+              <dd>год основания CRYA CREW</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="producers">
+          <article class="producer reveal">
+            <header class="producer__head">
+              <h3>Демид Абросимов</h3>
+              <p class="producer__role">Продюсер постпродакшена</p>
+            </header>
+            <p class="producer__bio">
+              Продюсер постпродакшена проектов телеканалов Пятница, СТС и ТНТ. Бывший руководитель
+              постпродакшена продюсерского центра «Ножи». За четыре года управления объём
+              производства вырос от 60 часов контента в год до 210 часов и стал самым крупным
+              телевизионным постом в России.
+            </p>
+            <ul class="tags">
+              <li>Большие девочки</li>
+              <li>Адский шеф</li>
+              <li>На ножах</li>
+              <li>4 свадьбы</li>
+              <li>ситком «Второй брак»</li>
+              <li>Пацанки</li>
+            </ul>
+          </article>
+
+          <article class="producer reveal" data-delay="1">
+            <header class="producer__head">
+              <h3>Гаянэ Мхчиян</h3>
+              <p class="producer__role">Креативный продюсер, редактор</p>
+            </header>
+            <p class="producer__bio">
+              Редактор, креативный продюсер и руководитель авторской и съёмочной групп проектов
+              телеканала СТС. При работе над проектом «Прятки» от создания идеи до финального
+              монтажа шоу два сезона сохраняет среднюю долю 11 и становится лидером воскресного
+              предпрайма.
+            </p>
+            <ul class="tags">
+              <li>Прятки</li>
+              <li>Тайный миллионер</li>
+              <li>Большой побег</li>
+              <li>Суперниндзя</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section section--alt" id="services">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="label">Что мы умеем</span>
+          <h2>От идеи до финального монтажа</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal">
+            <span class="card__num">01</span>
+            <h3>Non-scripted</h3>
+            <p>
+              Организуем все процессы от концепции до съёмки и монтажа. Предоставим
+              профессиональные команды на всех этапах продакшена: сценаристов, технических
+              специалистов, редакторов, операторов, логеров, монтажёров.
+            </p>
+          </article>
+
+          <article class="card reveal" data-delay="1">
+            <span class="card__num">02</span>
+            <h3>Сериалы</h3>
+            <p>
+              Обеспечиваем весь цикл производства сериалов: предоставление идеи, написание
+              сценария опытными сценаристами, кастинг, съёмка, монтаж.
+            </p>
+          </article>
+
+          <article class="card reveal" data-delay="2">
+            <span class="card__num">03</span>
+            <h3>Прямые эфиры</h3>
+            <p>
+              Организуем и технически обеспечим прямые трансляции любой сложности — от
+              корпоративных мероприятий до масштабных фестивалей.
+            </p>
+          </article>
+
+          <article class="card reveal" data-delay="3">
+            <span class="card__num">04</span>
+            <h3>Постпродакшен</h3>
+            <p>
+              Позаботимся обо всех этапах: редактура монтажа, режиссура монтажа, цветокоррекция,
+              звуковое оформление, графика, AI-эффекты.
+            </p>
+          </article>
+        </div>
+
+        <div class="highlight reveal">
+          <div class="highlight__text">
+            <span class="label">Аналитика</span>
+            <h3>«Поминутный» рейтинг</h3>
+            <p>
+              Благодаря системе аналитики «поминутного» рейтинга проектов мы создаём реалити, которые захватывают внимание зрителя и удерживают его у экрана каждую минуту, не давая переключить на другой канал.
+            </p>
+          </div>
+          <div class="highlight__bars" aria-hidden="true">
+            <span style="--h:38%"></span>
+            <span style="--h:52%"></span>
+            <span style="--h:44%"></span>
+            <span style="--h:71%"></span>
+            <span style="--h:63%"></span>
+            <span style="--h:88%"></span>
+            <span style="--h:74%"></span>
+            <span style="--h:96%"></span>
+            <span style="--h:81%"></span>
+            <span style="--h:100%"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="label">Проекты</span>
+          <h2>Наши проекты</h2>
+          <p class="section__sub">Телеканалы Пятница, СТС и ТНТ</p>
+        </div>
+
+        <ul class="projects">
+          <li class="reveal">Большие девочки</li>
+          <li class="reveal">Адский шеф</li>
+          <li class="reveal">На ножах</li>
+          <li class="reveal">4 свадьбы</li>
+          <li class="reveal">Второй брак</li>
+          <li class="reveal">Пацанки</li>
+          <li class="reveal">Прятки</li>
+          <li class="reveal">Тайный миллионер</li>
+          <li class="reveal">Большой побег</li>
+          <li class="reveal">Суперниндзя</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section class="section section--alt" id="contacts">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <span class="label">Контакты</span>
+          <h2>Расскажите о проекте</h2>
+          <p class="section__sub">
+            Позвоните или напишите в Telegram — ответим и предложим решение под вашу задачу.
+          </p>
+        </div>
+
+        <div class="contacts">
+          <article class="contact reveal">
+            <h3>Демид Абросимов</h3>
+            <a class="contact__phone" href="tel:+79670048496">+7 967 004 84 96</a>
+            <a class="btn btn--ghost btn--sm" href="https://t.me/username_demid" target="_blank" rel="noopener">Telegram</a>
+          </article>
+
+          <article class="contact reveal" data-delay="1">
+            <h3>Гаянэ Мхчиян</h3>
+            <a class="contact__phone" href="tel:+79266504072">+7 926 650 40 72</a>
+            <a class="btn btn--ghost btn--sm" href="https://t.me/username_gayane" target="_blank" rel="noopener">Telegram</a>
+          </article>
+
+          <article class="contact contact--qr reveal" data-delay="2">
+            <h3>Telegram по QR-коду</h3>
+            <p class="contact__note">Отсканируйте камерой телефона, чтобы написать нам.</p>
+            <!-- Замените пути на свои QR-карточки. Пока файла нет, рамка покажет подсказку. -->
+            <div class="qr">
+              <img src="assets/img/qr-demid.png" alt="QR-код Telegram — Демид" loading="lazy"
+                   onerror="this.parentNode.classList.add('qr--empty'); this.remove();">
+              <span>Демид</span>
+            </div>
+            <div class="qr">
+              <img src="assets/img/qr-gayane.png" alt="QR-код Telegram — Гаянэ" loading="lazy"
+                   onerror="this.parentNode.classList.add('qr--empty'); this.remove();">
+              <span>Гаянэ</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="logo logo--footer" href="#top">
+        <span class="logo__mark">CRYA</span><span class="logo__sub">CREW</span>
+      </a>
+      <p class="footer__text">Видеопродакшен полного цикла · Москва</p>
+      <p class="footer__copy">© <span id="year">2026</span> CRYA CREW. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/hero-fx.js"></script>
+</body>
+</html>

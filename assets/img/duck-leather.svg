@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <!--
+    Заглушка: кожаная утка «CRYA CREW», нарисована векторами.
+    Замените этот файл своим кадром duck.png — код подхватит его автоматически.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241110"/>
+      <stop offset="1" stop-color="#140b0b"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="0.5" cy="0.55" r="0.6">
+      <stop offset="0" stop-color="#ff3d2e" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#ff3d2e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="skin" cx="0.35" cy="0.3" r="0.85">
+      <stop offset="0" stop-color="#a9704c"/>
+      <stop offset="0.55" stop-color="#8a5433"/>
+      <stop offset="1" stop-color="#5a3520"/>
+    </radialGradient>
+    <radialGradient id="skinHead" cx="0.35" cy="0.28" r="0.9">
+      <stop offset="0" stop-color="#b87c55"/>
+      <stop offset="1" stop-color="#6b4029"/>
+    </radialGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e0a236"/>
+      <stop offset="1" stop-color="#b5791f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#pool)"/>
+
+  <!-- тень на полу -->
+  <ellipse cx="400" cy="392" rx="215" ry="26" fill="#000" opacity=".45"/>
+
+  <!-- хвост -->
+  <path d="M255 300 C205 285 178 262 190 238 C214 262 240 272 268 278 Z"
+        fill="#6f4327" stroke="#3d2415" stroke-width="3"/>
+
+  <!-- тело -->
+  <ellipse cx="385" cy="300" rx="175" ry="94" fill="url(#skin)"
+           stroke="#3d2415" stroke-width="4"/>
+
+  <!-- крыло -->
+  <path d="M300 268 C360 246 435 250 470 282 C445 322 372 336 314 316 C294 306 290 282 300 268 Z"
+        fill="#7a4a2c" stroke="#40260f" stroke-width="3.5" opacity=".95"/>
+  <path d="M330 288 C368 274 418 276 446 292" fill="none" stroke="#4b2b17"
+        stroke-width="3" stroke-linecap="round"/>
+  <path d="M336 306 C372 294 416 296 442 308" fill="none" stroke="#4b2b17"
+        stroke-width="3" stroke-linecap="round"/>
+
+  <!-- прошивочный шов по телу -->
+  <path d="M250 330 C300 372 430 384 508 340" fill="none" stroke="#f0d3b4"
+        stroke-width="2.5" stroke-dasharray="9 8" opacity=".6"/>
+
+  <!-- шея -->
+  <path d="M470 288 C486 236 500 196 524 172 C548 190 552 232 528 292 Z"
+        fill="#7f4d2e" stroke="#3d2415" stroke-width="3.5"/>
+
+  <!-- голова -->
+  <circle cx="530" cy="160" r="62" fill="url(#skinHead)" stroke="#3d2415" stroke-width="4"/>
+
+  <!-- клюв -->
+  <path d="M584 150 C636 146 662 162 658 180 C650 198 604 200 578 184 Z"
+        fill="url(#beak)" stroke="#7d5312" stroke-width="3"/>
+  <path d="M596 168 C624 166 640 172 646 178" fill="none" stroke="#8a5c15" stroke-width="2.5"/>
+
+  <!-- глаз -->
+  <circle cx="549" cy="140" r="11" fill="#1b1210"/>
+  <circle cx="545" cy="136" r="3.6" fill="#fff" opacity=".9"/>
+
+  <!-- прошивочный шов по голове -->
+  <path d="M492 132 C516 112 552 110 574 128" fill="none" stroke="#f0d3b4"
+        stroke-width="2.5" stroke-dasharray="8 7" opacity=".55"/>
+
+  <!-- лапка -->
+  <path d="M372 384 L372 404 M340 404 L404 404 M352 404 L344 416 M392 404 L400 416"
+        fill="none" stroke="#c98a34" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- подпись -->
+  <text x="400" y="440" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="19" font-weight="bold" letter-spacing="7" fill="#ff3d2e">CRYA CREW</text>
+</svg>
